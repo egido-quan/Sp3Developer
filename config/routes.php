@@ -14,6 +14,8 @@ $routes = array(
 	'/' => 'application#index',
 	'/agregar' => 'application#agregar',
 	'/confAgregar' => 'application#confAgregar',
+	'/modificar' => 'application#modificar',
+	'/confModificar' => 'application#confModificar',
 	'/eliminar' => 'application#eliminar',
 	'/confEliminar' => 'application#confEliminar'
 );

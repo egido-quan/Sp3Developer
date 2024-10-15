@@ -26,6 +26,15 @@ class ApplicationController extends Controller
     }
 
 
+    public function modificarAction() {
+
+    }
+
+
+    public function confModificarAction() {
+
+    }
 }
+
 
 
