@@ -8,8 +8,9 @@ class ApplicationController extends Controller
 {
 	public function indexAction() {
 
+
     }
-    public function agregarAction() {
+    public function agregarAction() {     
 
     }
 

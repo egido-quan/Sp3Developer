@@ -53,12 +53,23 @@ class TareasModel {
                 $nuevaToDoList[$i] = $dato;
             } 
             $i ++;           
-        }
- 
+        } 
         $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
         $archivo = __DIR__ . "/data/data.json";
         file_put_contents($archivo, $data_json);      
 
-}
+    }
+
+
+    public function eliminarLista() {
+        require_once "data/data.php";
+        $nuevaToDoList = getData();
+        foreach ($nuevaToDoList as $dato) {
+            unset($dato);
+        }    
+        $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
+        $archivo = __DIR__ . "/data/data.json";
+        file_put_contents($archivo, $data_json);    
+    }
 
 }
