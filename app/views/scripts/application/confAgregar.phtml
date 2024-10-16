@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<?php
+
+    $id = $_POST["id"];
+    $tarea = $_POST["tarea"];
+    $responsable = $_POST["responsable"];
+    $estado = $_POST["estado"];
+    $inicio = $_POST["inicio"];
+    $final = $_POST["final"];
+
+    $tareas = new TareasModel();
+    $tareas->agregar($id, $tarea, $responsable, $estado, $inicio, $final);
+
+?>
+
+<p class="ml-10 text-2xl">Tarea agregada !</p>
+
+</body>
+</html>
+
+

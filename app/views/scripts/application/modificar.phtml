@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+
+<h2 class="ml-20 text-5xl  font-bold"> MODIFICAR TAREA</h2>
+<br>
+<p class="ml-20 "> Introduce el ID de la tarea y escribe solamente en los campos que quieres modificar</p>
+<br>
+
+    
+
+
+    <form class="w-full max-w-sm"  id="nuevo" name="nuevo" method="POST" action=<?php echo WEB_ROOT . "/confModificar" ?> autocomplete="off">
+
+    <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-green-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        id a modificar
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-green-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" id="id" name="id">
+    </div>
+  </div>
+
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        tarea
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" id="tarea" name="tarea">
+    </div>
+  </div>
+
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        responsable
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" id="responsable" name="responsable">
+    </div>
+  </div>
+
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        estado
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" id="estado" name="estado">
+    </div>
+  </div>
+
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        inicio
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" id="inicio" name="inicio">
+    </div>
+  </div>
+
+  <div class="md:flex md:items-center mb-6">
+    <div class="md:w-1/3">
+      <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
+        final
+      </label>
+    </div>
+    <div class="md:w-2/3">
+      <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" id="final" name="final">
+    </div>
+  </div>
+  
+  <div class="md:flex md:items-center">
+    <div class="md:w-1/3"></div>
+    <div class="md:w-2/3">
+      <button class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" id="confAgregar" name="confAgregar" type="submit">
+        Modificar
+      </button>
+    </div>
+  </div>
+
+
+</form>
+<br><br>
+    
+</body>
+</html>
