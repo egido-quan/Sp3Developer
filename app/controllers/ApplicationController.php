@@ -35,6 +35,28 @@ class ApplicationController extends Controller
     public function confModificarAction() {
 
     }
+
+    public function buscarAction() {
+
+    }
+
+    public function confBuscarAction() {
+
+    }
+    public function borrarListaAction() {
+
+    }
+
+    public function confBorrarListaAction() {
+
+    }
+
+    public function confCargarListaAction() {
+
+    }
+    public function cargarListaAction() {
+
+    }
 }
 
 

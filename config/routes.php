@@ -17,5 +17,11 @@ $routes = array(
 	'/modificar' => 'application#modificar',
 	'/confModificar' => 'application#confModificar',
 	'/eliminar' => 'application#eliminar',
-	'/confEliminar' => 'application#confEliminar'
+	'/confEliminar' => 'application#confEliminar',
+	'/buscar' => 'application#buscar',
+	'/confBuscar' => 'application#confBuscar',
+	'/confBorrarLista' => 'application#confBorrarLista',
+	'/cargarLista' => 'application#cargarLista',
+	'/confCargarLista' => 'application#confCargarLista',
+	'/borrarLista' => 'application#borrarLista'
 );
