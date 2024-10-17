@@ -1,4 +1,4 @@
-Mejoras implementadas en esta rama:
+Mejoras implementadas en la rama feature/buscar_y_mas
 
 - Se han añadido las siguientes funciones para el usuario:
     * Buscar una tarea en la lista
