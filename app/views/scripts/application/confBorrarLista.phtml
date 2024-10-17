@@ -10,22 +10,12 @@
 
 <?php
 
-    $id = $_POST["id"];
-
-
     $tareas = new TareasModel();
-    $borrado = $tareas->eliminar($id);
-
+    $tareas->borrarLista();
 
 ?>
 
-<p class="ml-10 text-2xl">
-    <?php     if ($borrado ==false) {
-        echo "Este id no existe, no se ha podido borrar.";
-    } else {
-        echo "Tarea eliminada !";
-    }
-    ?> </p>
+<p class="ml-10 text-2xl">Lista borrada !</p>
 
 </body>
 </html>

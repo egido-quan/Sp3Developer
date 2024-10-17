@@ -52,7 +52,7 @@
         "tarea": "Atracar el banco de la esquina",
         "responsable": "M\u00f3nica",
         "estado": "pendiente",
-        "inicio": "2024-10-17T22:59",
+         "inicio": "2024-10-17T22:59",
         "fin": "2024-10-18T22:59"
     },
     {
@@ -60,7 +60,7 @@
         "tarea": "Visitar Lourdes",
         "responsable": "M\u00f3nica",
         "estado": "pendiente",
-        "inicio": "2025-10-18T22:59",
+         "inicio": "2025-10-18T22:59",
         "fin": "2025-10-18T22:59"
     },
     {

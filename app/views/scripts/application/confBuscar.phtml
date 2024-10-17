@@ -1,6 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
 
-<h2 class="ml-20 text-5xl  font-bold"> LISTA DE TAREAS</h2>
-<br>
+<?php
+
+    $id = $_POST["id"];
+    $tarea = $_POST["tarea"];
+    $responsable = $_POST["responsable"];
+    $estado = $_POST["estado"];
+    $inicio = $_POST["inicio"];
+    $final = $_POST["final"];
+
+    $tareas = new TareasModel();
+    $lista = $tareas->buscar($id, $tarea, $responsable, $estado, $inicio, $final);
+?>
+
+    <p class="ml-10 text-2xl">
+
+    <?php
+    if (count($lista) == 0) {
+        echo "Búsqueda sin resultados.";
+    }     ?> </p>
+    <br>
 
 <div class = "mx-5 flex space-x-5">
     <div class=" basis-2/3">
@@ -18,9 +45,6 @@
             </thead>
         <tbody>
             <?php  
-                $tareas = new TareasModel();
-                $lista = [];
-                $lista = $tareas->getToDoList();
                 foreach($lista as $tarea) {
                     echo "<tr class=\"text-blue-800 \">";
                     echo "<td class=\"border border-slate-300\">" . $tarea["id"] . "</td>";
@@ -35,25 +59,9 @@
         </tbody>
         </table>
     </div>
-    <div class=" mr-5 text-center space-y-5 basis-1/6 text-2xl ">
-        <div class="bg-green-200  py-5  rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/agregar" ?> >Agregar</a>
-        </div>
-        <div class="bg-blue-200  py-5   rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/modificar" ?> >Modificar</a>
-        </div>
-        <div class="bg-yellow-200  py-5   rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/buscar" ?> >Buscar</a>
-        </div>
-        <div class="bg-red-200  py-5 rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/eliminar" ?> >Eliminar</a>
-        </div>
-        <div class="bg-red-400  py-5 rounded-2xl text-xl">
-            <a href= <?php echo WEB_ROOT . "/borrarLista" ?> >Borrar lista</a>
-        </div>
-        <div class="bg-cyan-400  py-5 rounded-2xl text-xl">
-            <a href= <?php echo WEB_ROOT . "/cargarLista" ?> >Cargar lista de muestra</a>
-        </div>
-    </div>
-</div>
-<br><br>
+
+
+</body>
+</html>
+
+
