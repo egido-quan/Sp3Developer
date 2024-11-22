@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . "/../models/data/data.php";
 
 /**
  * Base controller for the application.
@@ -57,7 +58,10 @@ class ApplicationController extends Controller
 
     }
     public function cargarListaAction() {
-
+        $sampleData = getSampleData();
+        $data_json =  json_encode($sampleData, JSON_PRETTY_PRINT);
+        $archivo = __DIR__ . "/../models/data/data.json";
+        file_put_contents($archivo, $data_json); 
     }
 }
 
