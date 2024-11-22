@@ -99,12 +99,4 @@ class TareasModel {
     }
 
 
-    public function borrarLista() {
-        $nuevaToDoList = [];
-        $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
-        $archivo = __DIR__ . "/data/data.json";
-        file_put_contents($archivo, $data_json);    
-    }
-
-
 }
