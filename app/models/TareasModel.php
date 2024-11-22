@@ -106,13 +106,5 @@ class TareasModel {
         file_put_contents($archivo, $data_json);    
     }
 
-    public function cargarLista() {
-        $sampleData = getSampleData();
-        $data_json =  json_encode($sampleData, JSON_PRETTY_PRINT);
-        $archivo = __DIR__ . "/data/data.json";
-        file_put_contents($archivo, $data_json); 
-
-    }
-
 
 }
