@@ -7,9 +7,11 @@
 class ApplicationController extends Controller 
 {
 	public function indexAction() {
-
-
+        $tareas = new TareasModel();
+        $this->view->lista = [];
+        $this->view->lista = $tareas->getToDoList();
     }
+    
     public function agregarAction() {     
 
     }
