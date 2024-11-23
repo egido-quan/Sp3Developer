@@ -14,23 +14,6 @@ class TareasModel {
         return $this->toDoList;
     }
 
-    public function eliminar($id) {
-        $nuevaToDoList = getData();
-        $i = 0;
-        $found = false;
-        foreach ($nuevaToDoList as $dato) {
-            if ($dato["id"] == $id) {
-                array_splice($nuevaToDoList,$i,1);
-                $found = true;
-            }
-            $i ++;
-        }
-        $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
-        $archivo = __DIR__ . "/data/data.json";
-        file_put_contents($archivo, $data_json); 
-        return $found;     
-    }
-
     public function modificar($id, $tarea, $responsable, $estado, $inicio, $fin) {
         $nuevaToDoList = getData();
         $found = false;
