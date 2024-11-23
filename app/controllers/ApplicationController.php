@@ -18,7 +18,23 @@ class ApplicationController extends Controller
     }
 
     public function confAgregarAction() {
-
+        if ($_POST["inicio"] > $_POST["fin"]) {
+            $this->view->mensaje = "La fecha final no puede ser anterior a la fecha inicial";
+        } else {
+            $nuevaToDoList = getData();
+            $nuevoDato = ["id"=>$_POST["id"], 
+                "tarea"=>$_POST["tarea"], 
+                "responsable"=>$_POST["responsable"], 
+                "estado"=>$_POST["estado"], 
+                "inicio"=>$_POST["inicio"], 
+                "fin"=>$_POST["fin"]];
+                
+            $nuevaToDoList [] = $nuevoDato;
+            $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
+            $archivo = __DIR__ . "/../models/data/data.json";
+            file_put_contents($archivo, $data_json);   
+            $this->view->mensaje = "Tarea agregada!";
+        }
     }
 
     public function eliminarAction() {

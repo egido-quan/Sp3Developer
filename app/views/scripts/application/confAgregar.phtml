@@ -8,21 +8,8 @@
 </head>
 <body>
 
-<?php
 
-    $id = $_POST["id"];
-    $tarea = $_POST["tarea"];
-    $responsable = $_POST["responsable"];
-    $estado = $_POST["estado"];
-    $inicio = $_POST["inicio"];
-    $final = $_POST["final"];
-
-    $tareas = new TareasModel();
-    $tareas->agregar($id, $tarea, $responsable, $estado, $inicio, $final);
-
-?>
-
-<p class="ml-10 text-2xl">Tarea agregada !</p>
+<p class="ml-10 text-2xl"><?php echo $this->mensaje ?></p>
 
 </body>
 </html>
