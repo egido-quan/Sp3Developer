@@ -43,6 +43,21 @@ class ApplicationController extends Controller
 
     public function confEliminarAction() {
 
+        $id = $_POST["id"];
+
+        $nuevaToDoList = getData();
+        $i = 0;
+        $found = false;
+        foreach ($nuevaToDoList as $dato) {
+            if ($dato["id"] == $id) {
+                array_splice($nuevaToDoList,$i,1);
+                $found = true;
+            }
+            $i ++;
+        }
+        $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
+        $archivo = __DIR__ . "/../models/data/data.json";
+        file_put_contents($archivo, $data_json); 
     }
 
 

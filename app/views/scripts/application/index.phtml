@@ -27,6 +27,14 @@
                     echo "<td class=\"border border-slate-300\">" . $tarea["inicio"] . "</td>";
                     echo "<td class=\"border border-slate-300\">" . $tarea["fin"] . "</td>";
 
+                    echo '<td class="border border-slate-300">
+                            <form action="' . WEB_ROOT . '/confEliminar" method="POST">
+                                <input type="hidden" name="id" value="' . $tarea["id"] . '">
+                                    <button type="submit" class="text-red-600">
+                                    <img class="size-4 hover:scale-150" src="' . WEB_ROOT . '/images/borrar.png">
+                                    </button>
+                            </form>
+                        </td>';
             }
             ?>
         </tbody>
@@ -41,9 +49,6 @@
         </div>
         <div class="bg-yellow-200  py-5   rounded-2xl">
             <a href= <?php echo WEB_ROOT . "/buscar" ?> >Buscar</a>
-        </div>
-        <div class="bg-red-200  py-5 rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/eliminar" ?> >Eliminar</a>
         </div>
         <div class="bg-red-400  py-5 rounded-2xl text-xl">
             <a href= <?php echo WEB_ROOT . "/borrarLista" ?> >Borrar lista</a>
