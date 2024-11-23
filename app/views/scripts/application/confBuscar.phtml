@@ -8,25 +8,15 @@
 </head>
 <body>
 
-<?php
-
-    $id = $_POST["id"];
-    $tarea = $_POST["tarea"];
-    $responsable = $_POST["responsable"];
-    $estado = $_POST["estado"];
-    $inicio = $_POST["inicio"];
-    $final = $_POST["final"];
-
-    $tareas = new TareasModel();
-    $lista = $tareas->buscar($id, $tarea, $responsable, $estado, $inicio, $final);
-?>
-
     <p class="ml-10 text-2xl">
 
-    <?php
-    if (count($lista) == 0) {
-        echo "Búsqueda sin resultados.";
-    }     ?> </p>
+        <?php
+
+        if (count($this->resultado) == 0) {
+            echo "Búsqueda sin resultados.";
+        }
+        ?>
+    </p>
     <br>
 
 <div class = "mx-5 flex space-x-5">
@@ -45,7 +35,7 @@
             </thead>
         <tbody>
             <?php  
-                foreach($lista as $tarea) {
+                foreach($this->resultado as $tarea) {
                     echo "<tr class=\"text-blue-800 \">";
                     echo "<td class=\"border border-slate-300\">" . $tarea["id"] . "</td>";
                     echo "<td class=\"border border-slate-300\">" . $tarea["tarea"] . "</td>";
