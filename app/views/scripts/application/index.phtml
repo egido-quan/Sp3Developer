@@ -1,10 +1,12 @@
 
-<h2 class="ml-20 text-5xl  font-bold"> LISTA DE TAREAS</h2>
-<br>
+<div>
+<h2 class="ml-20 mr-80 text-5xl text-slate-500 mb-10 font-bold text-center "> LISTA DE TAREAS</h2>
+</div>
+
 
 <div class = "mx-5 flex space-x-5">
-    <div class=" basis-2/3">
-        <table class="mx-auto bg-blue-50 border-separate border-spacing-1 border border-slate-500">
+    <div class=" basis-2/3 h-96 overflow-auto">
+        <table class="mx-auto bg-blue-100 border-separate border-spacing-1 border border-slate-500">
             <thead>
                 <tr class="text-blue-900">
                     <th>id</th>
@@ -28,6 +30,15 @@
                     echo "<td class=\"border border-slate-300\">" . $tarea["fin"] . "</td>";
 
                     echo '<td class="border border-slate-300">
+                            <form action="' . WEB_ROOT . '/modificar" method="POST">
+                                <input type="hidden" name="id" value="' . $tarea["id"] . '">
+                                    <button type="submit" class="text-red-600">
+                                    <img class="size-4 hover:scale-150" src="' . WEB_ROOT . '/images/modificar.png">
+                                    </button>
+                            </form>
+                        </td>';
+
+                    echo '<td class="border border-slate-300">
                             <form action="' . WEB_ROOT . '/confEliminar" method="POST">
                                 <input type="hidden" name="id" value="' . $tarea["id"] . '">
                                     <button type="submit" class="text-red-600">
@@ -42,18 +53,15 @@
     </div>
     <div class=" mr-5 text-center space-y-5 basis-1/6 text-2xl ">
         <div class="bg-green-200  py-5  rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/agregar" ?> >Agregar</a>
+            <a href= <?php echo WEB_ROOT . "/agregar" ?> >Agregar tarea</a>
         </div>
         <div class="bg-blue-200  py-5   rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/modificar" ?> >Modificar</a>
-        </div>
-        <div class="bg-yellow-200  py-5   rounded-2xl">
-            <a href= <?php echo WEB_ROOT . "/buscar" ?> >Buscar</a>
+            <a href= <?php echo WEB_ROOT . "/buscar" ?> >Buscar tarea</a>
         </div>
         <div class="bg-red-400  py-5 rounded-2xl text-xl">
             <a href= <?php echo WEB_ROOT . "/borrarLista" ?> >Borrar lista</a>
         </div>
-        <div class="bg-cyan-400  py-5 rounded-2xl text-xl">
+        <div class="bg-yellow-100  py-5 rounded-2xl text-xl">
             <a href= <?php echo WEB_ROOT . "/cargarLista" ?> >Cargar lista de muestra</a>
         </div>
     </div>
