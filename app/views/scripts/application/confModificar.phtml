@@ -8,27 +8,8 @@
 </head>
 <body>
 
-<?php
 
-    $id = $_POST["id"];
-    $tarea = $_POST["tarea"];
-    $responsable = $_POST["responsable"];
-    $estado = $_POST["estado"];
-    $inicio = $_POST["inicio"];
-    $final = $_POST["final"];
-
-    $tareas = new TareasModel();
-    $found = $tareas->modificar($id, $tarea, $responsable, $estado, $inicio, $final);
-
-?>
-
-<p class="ml-10 text-2xl">
-    <?php     if ($found == false) {
-        echo "Esta tarea no está en la lista, no se ha podido modificar.";
-    } else {
-        echo "Tarea modificada !";
-    }
-    ?> </p>
+<p class="ml-10 text-2xl"><?php echo $this->mensaje ?></p>
 
 </body>
 </html>

@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . "/../models/data/data.php";
 
 /**
  * Base controller for the application.
@@ -12,16 +11,19 @@ class ApplicationController extends Controller
         $this->view->lista = [];
         $this->view->lista = $tareas->getToDoList();
     }
+
     
     public function agregarAction() {     
 
     }
 
+
     public function confAgregarAction() {
         if ($_POST["inicio"] > $_POST["fin"]) {
             $this->view->mensaje = "La fecha final no puede ser anterior a la fecha inicial";
         } else {
-            $nuevaToDoList = getData();
+            $tareas = new TareasModel();
+            $nuevaToDoList = $tareas->getToDoList();
             $nuevoDato = ["id"=>$_POST["id"], 
                 "tarea"=>$_POST["tarea"], 
                 "responsable"=>$_POST["responsable"], 
@@ -37,15 +39,18 @@ class ApplicationController extends Controller
         }
     }
 
+
     public function eliminarAction() {
 
     }
+
 
     public function confEliminarAction() {
 
         $id = $_POST["id"];
 
-        $nuevaToDoList = getData();
+        $tareas = new TareasModel();
+        $nuevaToDoList = $tareas->getToDoList();
         $i = 0;
         $found = false;
         foreach ($nuevaToDoList as $dato) {
@@ -63,20 +68,53 @@ class ApplicationController extends Controller
 
     public function modificarAction() {
 
+        $tareas = new TareasModel();
+        $nuevaToDoList = $tareas->getToDoList();
+        $this->view->dato = $nuevaToDoList[$_POST["id"] - 1];
+
     }
 
 
     public function confModificarAction() {
 
+
+
+        if ($_POST["inicio"] > $_POST["fin"]) {
+            $this->view->mensaje = "La fecha final no puede ser anterior a la fecha inicial";
+        } else {
+
+            $tareas = new TareasModel();
+            $nuevaToDoList = $tareas->getToDoList();
+
+            $datoActual = ($nuevaToDoList[$_POST["id"] - 1]);
+
+            $datoModificado = [];
+            $datoModificado["id"] = $_POST["id"];
+            $datoModificado["tarea"] = ($_POST["tarea"] == "") ? $datoActual["tarea"] : $_POST["tarea"];
+            $datoModificado["responsable"] = ($_POST["responsable"] == "") ? $datoActual["responsable"] : $_POST["responsable"];
+            $datoModificado["estado"] = ($_POST["estado"] == "") ? $datoActual["estado"] : $_POST["estado"];
+            $datoModificado["inicio"] = ($_POST["inicio"] == "") ? $datoActual["inicio"] : $_POST["inicio"];
+            $datoModificado["fin"] = ($_POST["fin"] == "") ? $datoActual["fin"] : $_POST["fin"];  
+
+            $nuevaToDoList[$_POST["id"] - 1] = $datoModificado;       
+            
+            $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
+            $archivo = __DIR__ . "/../models/data/data.json";
+            file_put_contents($archivo, $data_json); 
+            $this->view->mensaje = "Tarea modificada !";
+        }
     }
+
 
     public function buscarAction() {
 
     }
 
+
     public function confBuscarAction() {
 
-        $nuevaToDoList = getData();
+        $tareas = new TareasModel();
+        $nuevaToDoList = $tareas->getToDoList();
 
         $busqueda = [
             "id"=>$_POST["id"],
@@ -117,9 +155,12 @@ class ApplicationController extends Controller
         }
         $this->view->resultado = $resultado;
     }
+
+
     public function borrarListaAction() {
 
     }
+
 
     public function confBorrarListaAction() {
         $nuevaToDoList = [];
@@ -128,16 +169,20 @@ class ApplicationController extends Controller
         file_put_contents($archivo, $data_json);  
     }
 
+
     public function cargarListaAction() {
 
     }
 
+
     public function confCargarListaAction() {
-        $sampleData = getSampleData();
+        $tareas = new TareasModel();
+        $sampleData = $tareas->getToDoListSample();
         $data_json =  json_encode($sampleData, JSON_PRETTY_PRINT);
         $archivo = __DIR__ . "/../models/data/data.json";
         file_put_contents($archivo, $data_json); 
     }
+
 
     public function arreglar ($texto): string {
         $texto = iconv('UTF-8', 'ASCII//TRANSLIT', $texto);
