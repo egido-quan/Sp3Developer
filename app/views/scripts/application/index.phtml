@@ -39,7 +39,7 @@
                         </td>';
 
                     echo '<td class="border border-slate-300">
-                            <form action="' . WEB_ROOT . '/confEliminar" method="POST">
+                            <form action="' . WEB_ROOT . '/conf_eliminar" method="POST">
                                 <input type="hidden" name="id" value="' . $tarea["id"] . '">
                                     <button type="submit" class="text-red-600">
                                     <img class="size-4 hover:scale-150" src="' . WEB_ROOT . '/images/borrar.png">
@@ -59,10 +59,10 @@
             <a href= <?php echo WEB_ROOT . "/buscar" ?> >Buscar tarea</a>
         </div>
         <div class="bg-red-400  py-5 rounded-2xl text-xl">
-            <a href= <?php echo WEB_ROOT . "/borrarLista" ?> >Borrar lista</a>
+            <a href= <?php echo WEB_ROOT . "/borrar_lista" ?> >Borrar lista</a>
         </div>
         <div class="bg-yellow-100  py-5 rounded-2xl text-xl">
-            <a href= <?php echo WEB_ROOT . "/cargarLista" ?> >Cargar lista de muestra</a>
+            <a href= <?php echo WEB_ROOT . "/cargar_lista" ?> >Cargar lista de muestra</a>
         </div>
     </div>
 </div>

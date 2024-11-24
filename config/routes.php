@@ -10,18 +10,18 @@
  * '/calendar' => 'calendar#index'
  */
 $routes = array(
-	'/test' => 'test#index',
+	//'/test' => 'test#index',
 	'/' => 'application#index',
 	'/agregar' => 'application#agregar',
-	'/confAgregar' => 'application#confAgregar',
+	'/conf_agregar' => 'application#confAgregar',
 	'/modificar' => 'application#modificar',
-	'/confModificar' => 'application#confModificar',
+	'/conf_modificar' => 'application#confModificar',
 	'/eliminar' => 'application#eliminar',
-	'/confEliminar' => 'application#confEliminar',
+	'/conf_eliminar' => 'application#confEliminar',
 	'/buscar' => 'application#buscar',
-	'/confBuscar' => 'application#confBuscar',
-	'/confBorrarLista' => 'application#confBorrarLista',
-	'/cargarLista' => 'application#cargarLista',
-	'/confCargarLista' => 'application#confCargarLista',
-	'/borrarLista' => 'application#borrarLista'
+	'/conf_buscar' => 'application#confBuscar',
+	'/conf_borrar_lista' => 'application#confBorrarLista',
+	'/cargar_lista' => 'application#cargarLista',
+	'/conf_cargar_lista' => 'application#confCargarLista',
+	'/borrar_lista' => 'application#borrarLista'
 );
