@@ -34,31 +34,4 @@ class SqlModel {
         return $this->toDoListSample;
     }
 
-
-    public function modificar($id, $tarea, $responsable, $estado, $inicio, $fin) {
-        try {
-            $sql = "SELECT id, tarea, responsable, estado, inicio, fin FROM Tareas WHERE id = '$id'";
-            $query = $this->dbh->query($sql);
-            $dato = $query->fetchAll(PDO::FETCH_ASSOC);
-            $dato = $dato[0];
-
-            $existe = true;
-
-            $newTarea = ($tarea == "") ? $dato["tarea"] : $tarea;
-            $newResponsable = ($responsable == "") ? $dato["responsable"] : $responsable;
-            $newEstado = ($estado == "") ? $dato["estado"] : $estado;
-            $newInicio = ($inicio == "") ? $dato["inicio"] : $inicio;
-            $newFin = ($fin == "") ? $dato["fin"] : $fin;  
-            $sql = "UPDATE Tareas SET tarea = '$newTarea', responsable = '$newResponsable', estado = '$newEstado', inicio = '$newInicio', fin = '$newFin'  WHERE id = '$id'";
-            $query = $this->dbh->query($sql);
-
-            } catch (PDOException $e) {
-            echo "Estatara no se ha podido modificar " . $e->getMessage();
-            $existe = false;
-        }
-
-        return $existe;  
-
-    }      
-
 }
