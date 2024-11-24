@@ -7,13 +7,19 @@
 class ApplicationController extends Controller 
 {
 	public function indexAction() {
-        $tareas = new TareasModel();
-        $this->view->lista = [];
+        $tareas = new SqlModel();
         $this->view->lista = $tareas->getToDoList();
     }
 
     
-    public function agregarAction() {     
+    public function agregarAction() {   
+        
+        $tareas = new SqlModel();
+
+        $lista = [];
+        $lista = $tareas->getToDoList();
+        $last = $lista[count($lista) - 1];
+        $this->view->newId = $last["id"] + 1;
 
     }
 
@@ -22,8 +28,8 @@ class ApplicationController extends Controller
         if ($_POST["inicio"] > $_POST["fin"]) {
             $this->view->mensaje = "La fecha final no puede ser anterior a la fecha inicial";
         } else {
-            $tareas = new TareasModel();
-            $nuevaToDoList = $tareas->getToDoList();
+            $tareas = new SqlModel();
+            /*$nuevaToDoList = $tareas->getToDoList();
             $nuevoDato = ["id"=>$_POST["id"], 
                 "tarea"=>$_POST["tarea"], 
                 "responsable"=>$_POST["responsable"], 
@@ -35,9 +41,26 @@ class ApplicationController extends Controller
             $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
             $archivo = __DIR__ . "/../models/data/data.json";
             file_put_contents($archivo, $data_json);   
-            $this->view->mensaje = "Tarea agregada!";
-        }
+            $this->view->mensaje = "Tarea agregada!";*/
+
+            $tarea = $_POST["tarea"];
+            $responsable = $_POST["responsable"];
+            $estado = $_POST["estado"];
+            $inicio = $_POST["inicio"];
+            $fin = $_POST["fin"];
+
+            try {
+                $sql = "INSERT INTO `Tareas` (`tarea`, `responsable`, `estado`, `inicio`, `fin`) 
+                VALUES ('$tarea', '$responsable', '$estado', '$inicio', '$fin')";
+                $query = $tareas->getDbhSql($sql);  
+                $this->view->mensaje = "Tarea agregada!";
+    
+                } catch (PDOException $e) {
+                    $this->view->mensaje = "Error al agregar tarea: " . $e->getMessage();
+                }
+            }
     }
+    
 
 
     public function eliminarAction() {
@@ -48,7 +71,7 @@ class ApplicationController extends Controller
     public function confEliminarAction() {
 
         $id = $_POST["id"];
-
+/*
         $tareas = new TareasModel();
         $nuevaToDoList = $tareas->getToDoList();
         $i = 0;
@@ -60,11 +83,22 @@ class ApplicationController extends Controller
             }
             $i ++;
         }
+
         $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
         $archivo = __DIR__ . "/../models/data/data.json";
-        file_put_contents($archivo, $data_json); 
-    }
+        file_put_contents($archivo, $data_json); */
 
+        $tareas = new SqlModel();
+
+        try {
+            $sql = "DELETE FROM Tareas WHERE `Tareas`.`id` = '$id'";
+            $query = $tareas->getDbhSql($sql); 
+            $this->view->mensaje = "Tarea eliminada !";
+
+        } catch (PDOException $e) {
+            $$this->view->mensaje = "Error al eliminar la tarea" . $e->getMessage();
+        }
+    }
 
     public function modificarAction() {
 
@@ -76,8 +110,6 @@ class ApplicationController extends Controller
 
 
     public function confModificarAction() {
-
-
 
         if ($_POST["inicio"] > $_POST["fin"]) {
             $this->view->mensaje = "La fecha final no puede ser anterior a la fecha inicial";
@@ -113,47 +145,60 @@ class ApplicationController extends Controller
 
     public function confBuscarAction() {
 
-        $tareas = new TareasModel();
-        $nuevaToDoList = $tareas->getToDoList();
+        try {
 
-        $busqueda = [
-            "id"=>$_POST["id"],
-            "tarea"=>$_POST["tarea"],
-            "responsable"=>$_POST["responsable"],
-            "estado"=>$_POST["estado"],
-            "inicio"=>$_POST["inicio"],
-            "fin"=>$_POST["fin"]
-        ];
+            $tareas = new SqlModel();
+            $listaTareas = $tareas->getToDoList();
+            /*$busqueda = [
+                "id"=>$_POST["id"],
+                "tarea"=>$_POST["tarea"],
+                "responsable"=>$_POST["responsable"],
+                "estado"=>$_POST["estado"],
+                "inicio"=>$_POST["inicio"],
+                "fin"=>$_POST["fin"]
+            ];*/
+            $id = $_POST["id"];
+            $tarea = $_POST["tarea"];
+            $responsable = $_POST["responsable"];
+            $estado = $_POST["estado"];
+            $inicio = $_POST["inicio"];
+            $fin = $_POST["fin"];
+            $busqueda = ["id"=>$id, "tarea"=>$tarea, "responsable"=>$responsable, "estado"=>$estado, "inicio"=>$inicio, "fin"=>$fin];
+            
+            $resultado = [];
 
-        $resultado = [];
+            foreach ($listaTareas as $dato) {
+                $j = 0;
+                if ($busqueda["id"] == "" || $busqueda["id"] == $dato["id"]) {
+                    $j ++;
+                }
+                if ($busqueda["tarea"] == "" || str_contains(strtolower($dato["tarea"]), strtolower($busqueda["tarea"]))) {
+                    $j ++;
+                }
+                if ($busqueda["responsable"] == "" ||
+                    str_contains(self::arreglar($dato["responsable"]), self::arreglar($busqueda["responsable"]))) {
+                    $j ++;
+                }
+                if ($busqueda["estado"] == "" || $busqueda["estado"] == $dato["estado"]) {
+                    $j ++;
+                }
+                if ($busqueda["inicio"] == "" || $busqueda["inicio"] == $dato["inicio"]) {
+                    $j ++;
+                }
+                if ($busqueda["fin"] == "" || $busqueda["fin"] == $dato["fin"]) {
+                    $j ++;
+                }
+            
+                if ($j == 6) {
+                    $resultado [] = $dato;
+                }        
+            }
+            $this->view->resultado = $resultado;
+            $this->view->mensaje = "Este es el resultado de la búsqueda";
 
-        foreach ($nuevaToDoList as $dato) {
-            $j = 0;
-            if ($busqueda["id"] == "" || $busqueda["id"] == $dato["id"]) {
-                $j ++;
-            }
-            if ($busqueda["tarea"] == "" || str_contains(strtolower($dato["tarea"]), strtolower($busqueda["tarea"]))) {
-                $j ++;
-            }
-            if ($busqueda["responsable"] == "" ||
-                str_contains(self::arreglar($dato["responsable"]), self::arreglar($busqueda["responsable"]))) {
-                $j ++;
-            }
-            if ($busqueda["estado"] == "" || $busqueda["estado"] == $dato["estado"]) {
-                $j ++;
-            }
-            if ($busqueda["inicio"] == "" || $busqueda["inicio"] == $dato["inicio"]) {
-                $j ++;
-            }
-            if ($busqueda["fin"] == "" || $busqueda["fin"] == $dato["fin"]) {
-                $j ++;
-            }
-         
-            if ($j == 6) {
-                $resultado [] = $dato;
-            }        
+        } catch (PDOException $e) {
+            $this->view->mensaje = "Error en la búsqueda: " . $e->getMessage();
         }
-        $this->view->resultado = $resultado;
     }
 
 
@@ -163,10 +208,23 @@ class ApplicationController extends Controller
 
 
     public function confBorrarListaAction() {
-        $nuevaToDoList = [];
+        /*$nuevaToDoList = [];
         $data_json =  json_encode($nuevaToDoList, JSON_PRETTY_PRINT);
         $archivo = __DIR__ . "/../models/data/data.json";
-        file_put_contents($archivo, $data_json);  
+        file_put_contents($archivo, $data_json);*/
+
+        $tareas = new SqlModel();
+        
+        try {
+            
+            $sql = "TRUNCATE TABLE Tareas";
+            $query = $tareas->getDbhSql($sql);   
+            $this->view->mensaje = "Lista borrada !";
+
+        } catch (PDOException $e) {
+            $$this->view->mensaje = "Error al borrar la lista" . $e->getMessage();
+        }
+
     }
 
 
@@ -176,11 +234,29 @@ class ApplicationController extends Controller
 
 
     public function confCargarListaAction() {
-        $tareas = new TareasModel();
+        /*$tareas = new TareasModel();
         $sampleData = $tareas->getToDoListSample();
         $data_json =  json_encode($sampleData, JSON_PRETTY_PRINT);
         $archivo = __DIR__ . "/../models/data/data.json";
-        file_put_contents($archivo, $data_json); 
+        file_put_contents($archivo, $data_json); */
+
+        //include "data/data.php";
+        $tareas = new SqlModel();
+        $sampleData = getSampleData();
+        $sql = "TRUNCATE TABLE Tareas";
+        $query = $tareas->getDbhSql($sql);
+        
+        foreach ($sampleData as $tarea)
+        try { 
+            $sql = "INSERT INTO `Tareas` (`tarea`, `responsable`, `estado`, `inicio`, `fin`) 
+            VALUES ('$tarea[tarea]', '$tarea[responsable]', '$tarea[estado]', '$tarea[inicio]', '$tarea[fin]')";
+            $query = $tareas->getDbhSql($sql); 
+            $this->view->mensaje = "Lista de muestra cargada !";
+
+        } catch (PDOException $e) {
+            $this->view->mensaje =  "Error al agregar tarea: " . $e->getMessage();
+
+        }   
     }
 
 
